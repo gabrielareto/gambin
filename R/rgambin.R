@@ -18,10 +18,11 @@ rgambin <- function(n, alpha, maxoctave, round=TRUE)
 	# (following the fitGambin method,
 	# but this should be changed if necessary)
 	u <- 2^(1:length(octs))-1		# upper limit
-	l = c(1, u+1)[-(length(u)+1)]	# lower limit
+	l <- c(1, u+1)[-(length(u)+1)]	# lower limit
 	
 	# Sample uniformily within boundaries:
 	out <- runif(n, min=l[octs.n], max=u[octs.n])
+		
 	if(round) out <- round(out)
 	return(out)
 }
