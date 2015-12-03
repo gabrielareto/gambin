@@ -35,25 +35,6 @@ function(abundances, p=1)
 }
 
 
-.sample_abundances_M
-<- function(M, p=1) # applied to a composition matrix
-{
-	n = round(sum(M)*p)
-	vals <- M[1:length(M)]
-	rows <- rep(1:nrow(M), times=ncol(M))[vals>0]
-	cols <- rep(1:ncol(M), each =nrow(M))[vals>0]
-	vals <- vals[vals>0]
-	inds <- lapply(1:length(vals), function(i) cbind(rep(rows[i], vals[i]), rep(cols[i], vals[i])))
-	inds <- do.call(rbind, inds)
-	inds <- inds[sample(1:sum(M), n),]
-	t <- table(paste(inds[,1], inds[,2]))
-	inds <- unique(inds)
-	inds <- cbind(inds, t[paste(inds[,1], inds[,2])])
-	M2 <- M*0
-	for(i in 1:nrow(inds)) M2[inds[i,1], inds[i,2]] <- inds[i,3]
-	return(M2)
-}
-
 
 # This should function for continuous variables as well.
 # One individual can be thought as a "cluster" of infinitesimal 
